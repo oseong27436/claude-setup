@@ -8,3 +8,5 @@
 
 # OCI 설정
 .oci-config
+oseong-vm-key
+oseong-vm-key.pub
