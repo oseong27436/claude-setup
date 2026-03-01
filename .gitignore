@@ -8,5 +8,8 @@
 
 # OCI 설정
 .oci-config
+
+# Google OAuth
+.google-client-secret.json
 oseong-vm-key
 oseong-vm-key.pub
