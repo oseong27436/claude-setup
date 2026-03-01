@@ -9,7 +9,10 @@ echo "  Claude Code Setup"
 echo "================================"
 echo ""
 
-bash "$SETUP_DIR/scripts/git.sh"
+# --- Git 글로벌 설정 ---
+git config --global user.email "oseong27436@gmail.com"
+git config --global user.name "oseong27436"
+echo "[Git] 완료"
 echo ""
 
 bash "$SETUP_DIR/scripts/mcp.sh" "$SETUP_DIR"
