@@ -9,6 +9,12 @@ echo "  Claude Code Setup"
 echo "================================"
 echo ""
 
+# --- 글로벌 CLAUDE.md 설치 ---
+mkdir -p "$HOME/.claude"
+cp "$SETUP_DIR/global-claude.md" "$HOME/.claude/CLAUDE.md"
+echo "[CLAUDE.md] 글로벌 설정 완료"
+echo ""
+
 # --- Git 글로벌 설정 ---
 git config --global user.email "oseong27436@gmail.com"
 git config --global user.name "oseong27436"
