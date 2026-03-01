@@ -63,24 +63,25 @@ claude mcp add supabase --transport http https://mcp.supabase.com/mcp
 echo "[MCP] Supabase 완료"
 
 # --- Google Workspace ---
-if [ -f "$SETUP_DIR/.google.env" ] && [ -f "$SETUP_DIR/.google-client-secret.json" ]; then
+if [ -f "$SETUP_DIR/.google.env" ]; then
   source "$SETUP_DIR/.google.env"
-  PYTHON3=$(which python3 2>/dev/null || which python 2>/dev/null)
-  "$PYTHON3" -m pip install workspace-mcp 2>/dev/null
 
-  # client_secret.json 복사
-  SITE_PACKAGES=$("$PYTHON3" -c "import site; print(site.getsitepackages()[0])")
-  cp "$SETUP_DIR/.google-client-secret.json" "$SITE_PACKAGES/client_secret.json"
+  # pip (Python311) 으로 workspace-mcp 설치
+  pip install workspace-mcp 2>/dev/null
 
-  WORKSPACE_MCP=$(dirname "$PYTHON3")/../Scripts/workspace-mcp.exe
-  if [ ! -f "$WORKSPACE_MCP" ]; then
-    WORKSPACE_MCP=$(dirname "$PYTHON3")/workspace-mcp
+  # pip의 Scripts 폴더에서 workspace-mcp 찾기
+  PIP_SCRIPTS=$(dirname "$(which pip 2>/dev/null)")
+  WORKSPACE_MCP="${PIP_SCRIPTS}/workspace-mcp"
+  if [ -f "${WORKSPACE_MCP}.exe" ]; then
+    WORKSPACE_MCP="${WORKSPACE_MCP}.exe"
   fi
+
+  claude mcp remove google-workspace 2>/dev/null
   claude mcp add google-workspace \
-    -e GOOGLE_CLIENT_ID="$GOOGLE_CLIENT_ID" \
-    -e GOOGLE_CLIENT_SECRET="$GOOGLE_CLIENT_SECRET" \
+    -e GOOGLE_OAUTH_CLIENT_ID="$GOOGLE_CLIENT_ID" \
+    -e GOOGLE_OAUTH_CLIENT_SECRET="$GOOGLE_CLIENT_SECRET" \
     -- "$WORKSPACE_MCP"
   echo "[MCP] Google Workspace 완료"
 else
-  echo "[MCP] Google Workspace - .google.env 또는 .google-client-secret.json 없음, 스킵"
+  echo "[MCP] Google Workspace - .google.env 없음, 스킵"
 fi
