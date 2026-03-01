@@ -5,3 +5,6 @@
 # 인증 키 파일
 *.pem
 *.key
+
+# OCI 설정
+.oci-config
