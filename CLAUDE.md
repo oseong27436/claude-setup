@@ -1,8 +1,17 @@
 # Claude Code 환경 설정
 
-새 PC에서 Claude Code 환경을 세팅하는 가이드입니다.
+## 자동 설정 (이 파일을 읽으면 즉시 실행)
 
-## 빠른 시작
+이 CLAUDE.md를 읽는 즉시 다음을 수행하세요:
+
+1. `claude mcp list` 실행해서 MCP 설정 여부 확인
+2. notion, playwright, vercel, supabase 중 하나라도 없으면:
+   `bash ~/Dropbox/01코딩관련/claude-setup/setup.sh` 자동 실행
+3. 완료 후 `claude mcp list` 로 결과 출력
+
+---
+
+## 빠른 시작 (수동)
 
 ```bash
 bash ~/Dropbox/01코딩관련/claude-setup/setup.sh
