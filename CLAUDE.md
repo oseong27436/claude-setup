@@ -5,7 +5,7 @@
 이 CLAUDE.md를 읽는 즉시 다음을 수행하세요:
 
 1. `claude mcp list` 실행해서 MCP 설정 여부 확인
-2. notion, playwright, vercel, supabase 중 하나라도 없으면:
+2. notion, github, playwright, vercel, supabase 중 하나라도 없으면:
    `bash ~/Dropbox/01코딩관련/claude-setup/setup.sh` 자동 실행
 3. 완료 후 `claude mcp list` 로 결과 출력
 
@@ -17,47 +17,53 @@
 bash ~/Dropbox/01코딩관련/claude-setup/setup.sh
 ```
 
+개별 실행:
+```bash
+bash ~/Dropbox/01코딩관련/claude-setup/scripts/git.sh
+bash ~/Dropbox/01코딩관련/claude-setup/scripts/mcp.sh ~/Dropbox/01코딩관련/claude-setup
+bash ~/Dropbox/01코딩관련/claude-setup/scripts/superclaude.sh
+```
+
+---
+
+## 구조
+
+```
+claude-setup/
+├── setup.sh              # 전체 실행 진입점
+├── scripts/
+│   ├── git.sh            # Git 글로벌 설정
+│   ├── mcp.sh            # MCP 서버 전체 설정
+│   └── superclaude.sh    # SuperClaude 설치
+├── .notion.env           # Notion 토큰 (Dropbox 동기화, git 제외)
+└── .github.env           # GitHub PAT (Dropbox 동기화, git 제외)
+```
+
+---
+
 ## MCP 서버 목록
 
-| 서버 | 용도 | 토큰 필요 |
-|------|------|-----------|
+| 서버 | 용도 | 토큰 |
+|------|------|------|
 | notion | Notion 읽기/쓰기 | `.notion.env` |
+| github | GitHub 레포 관리 | `.github.env` |
 | playwright | 브라우저 자동화 | 없음 |
-| vercel | Vercel 배포 관리 | 없음 (OAuth) |
-| supabase | Supabase DB 관리 | 없음 (OAuth) |
+| vercel | Vercel 배포 | 없음 (OAuth) |
+| supabase | Supabase DB | 없음 (OAuth) |
 
-## 토큰 파일 위치
+## Env 파일 형식
 
-Dropbox에서 자동 동기화됨:
+**.notion.env**
 ```
-~/Dropbox/01코딩관련/claude-setup/
-├── .notion.env     # Notion Integration Token
-```
-
-## 수동 설치
-
-### Notion
-```bash
-source ~/Dropbox/01코딩관련/claude-setup/.notion.env
-claude mcp add notion \
-  -e OPENAPI_MCP_HEADERS="{\"Authorization\": \"Bearer $NOTION_TOKEN\", \"Notion-Version\": \"2022-06-28\"}" \
-  -- npx -y @notionhq/notion-mcp-server
+NOTION_TOKEN=ntn_xxxxxxxxxxxx
 ```
 
-### Playwright
-```bash
-claude mcp add playwright npx @playwright/mcp@latest
+**.github.env**
+```
+GITHUB_TOKEN=ghp_xxxxxxxxxxxx
 ```
 
-### Vercel
-```bash
-claude mcp add vercel --transport http https://mcp.vercel.com
-```
-
-### Supabase
-```bash
-claude mcp add supabase --transport http https://mcp.supabase.com/mcp
-```
+---
 
 ## Notion 페이지 연결
 
