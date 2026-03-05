@@ -13,6 +13,12 @@ echo ""
 mkdir -p "$HOME/.claude"
 cp "$SETUP_DIR/global-claude.md" "$HOME/.claude/CLAUDE.md"
 echo "[CLAUDE.md] 글로벌 설정 완료"
+
+# --- 커스텀 커맨드 설치 ---
+if [ -d "$SETUP_DIR/commands" ]; then
+  cp -r "$SETUP_DIR/commands/"* "$HOME/.claude/commands/"
+  echo "[Commands] 커스텀 커맨드 설치 완료"
+fi
 echo ""
 
 # --- Git 글로벌 설정 ---
