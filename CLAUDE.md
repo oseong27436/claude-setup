@@ -65,6 +65,16 @@ GITHUB_TOKEN=ghp_xxxxxxxxxxxx
 
 ---
 
+## 웹 프로젝트 작업 시 참조
+
+웹 프로젝트(신규 생성 또는 수정)를 시작하기 전에 반드시 읽을 것:
+```
+C:\Users\GKL\Dropbox\01코딩관련\claude-setup\웹제작방식.md
+```
+스택, DB 구조, 배포 순서, UI 컨벤션 등 모든 규칙이 정의되어 있음.
+
+---
+
 ## Notion 페이지 연결
 
 MCP 설치 후 접근할 각 Notion 페이지에서:
